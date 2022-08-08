@@ -1,7 +1,8 @@
 <script>
   export let data = []
-  export let barWidth = 10
-  export let barSpacing = 2
+  const barWidth = 6
+  const barSpacing = 2
+  const barYOffset = 1
 
   // compute dimensions
   $: dimensions = {
@@ -14,8 +15,16 @@
 <svg viewBox="0 0 {dimensions.width} {dimensions.height}" xmlns="http://www.w3.org/2000/svg">
   {#each data as y, x}
     <!-- bar -->
-    <rect x={x * (barWidth + barSpacing)} y={dimensions.height - y} width={barWidth} height={y} />
-    <text x={4 + x * (barWidth + barSpacing)} y={Math.max(...data)} class="small">{x + 1}</text>
+    <rect
+      x={x * (barWidth + barSpacing)}
+      y={dimensions.height - y + barYOffset}
+      width={barWidth}
+      height={y}
+    />
+    <!-- calculate x-placement of text depending on one or two digits in number -->
+    <text x={(x < 9 ? 2 : 1) + x * (barWidth + barSpacing)} y={Math.max(...data)} class="small"
+      >{x + 1}</text
+    >
   {/each}
 </svg>
 
@@ -25,6 +34,8 @@
     padding: 1rem;
     border-radius: 0.5rem;
     overflow: visible;
+    width: 50vw;
+    max-width: 50vw;
   }
 
   rect {

@@ -1,6 +1,8 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
+  import BarChart from './lib/BarChart.svelte'
+
+  $: occurrences = []
 </script>
 
 <main>
@@ -11,8 +13,16 @@
   </div>
   <h1>Dat wonky d20</h1>
 
-  <div class="card">
-    <Counter />
+  <div class="counterWrapper">
+    <Counter bind:occurrences />
+  </div>
+
+  <div class="chartWrapper">
+    <BarChart data={occurrences} />
+  </div>
+
+  <div class="dataWrapper">
+    {JSON.stringify(occurrences, null, 2)}
   </div>
 </main>
 
@@ -25,5 +35,17 @@
   }
   .logo:hover {
     filter: drop-shadow(0 0 2em #47972caa);
+  }
+
+  .counterWrapper {
+    padding: 2em;
+  }
+
+  .chartWrapper {
+    margin-top: 1em;
+  }
+
+  .dataWrapper {
+    margin-top: 1em;
   }
 </style>
