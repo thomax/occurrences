@@ -1,13 +1,13 @@
 <script>
-  const count = 20
   export let occurrences
+  export let dieSides
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < dieSides; i++) {
     occurrences[i] = 0
   }
 
   const increment = (index, inc) => {
-    if (inc > 0 || window.confirm('Sure you want to decrease?')) {
+    if (inc > 0 || window.confirm('Just checking you really want to decrease..?')) {
       occurrences[index] = occurrences[index] + inc
     }
     console.log(index, occurrences)
@@ -37,17 +37,28 @@
 <style>
   button {
     border: 1px solid rgb(185, 184, 184);
-    margin-right: 5px;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.25s;
+  }
+
+  button:hover {
+    background-color: #51a618;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
   }
 
   .numbersWrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(auto-fill, 30px);
-    grid-row-gap: 0.5em;
-    grid-column-gap: 0.5em;
-    width: 50vw;
-    max-width: 50vw;
+    grid-row-gap: 0.5rem;
+    grid-column-gap: 0.5rem;
   }
 
   .item {
@@ -56,10 +67,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 8vw;
   }
 
   .bold {
-    font-size: 2em;
+    font-size: 1.5rem;
     font-weight: 700;
   }
 
